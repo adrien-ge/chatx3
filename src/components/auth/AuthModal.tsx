@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { X, Mail, CheckCircle, AlertCircle, User, Lock, Eye, EyeOff, Bot } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { supabase, isSupabaseConfigured } from '../../lib/supabase';
+import { X, Bot, Mail, Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -10,284 +9,244 @@ interface AuthModalProps {
 }
 
 const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [isResetPassword, setIsResetPassword] = useState(false);
-  const [showEmailSent, setShowEmailSent] = useState(false);
+  const { signIn, signUp, resetPassword } = useAuth();
+  const { t } = useTranslation();
+  const [mode, setMode] = useState<'login' | 'register' | 'reset'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const { t } = useTranslation();
-  const navigate = useNavigate();
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setSuccess(null);
-
-    if (!isSupabaseConfigured()) {
-      setError('L\'authentification n\'est pas configurée. Veuillez contacter l\'administrateur.');
-      return;
-    }
-
-    if (!email.trim()) {
-      setError('Veuillez entrer votre adresse email.');
-      return;
-    }
-
-    if (!isResetPassword && !password.trim()) {
-      setError('Veuillez entrer votre mot de passe.');
-      return;
-    }
-
-    setLoading(true);
+    setError('');
+    setSuccess('');
+    setIsLoading(true);
 
     try {
-      if (isResetPassword) {
-        // Réinitialisation de mot de passe
-        const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-          redirectTo: `${window.location.origin}/reset-password`,
-        });
-        
-        if (error) throw error;
-        
-        setSuccess('Un email de réinitialisation a été envoyé à votre adresse. Vérifiez votre boîte de réception et cliquez sur le lien pour réinitialiser votre mot de passe.');
-        setShowEmailSent(true);
-        
-      } else if (isLogin) {
-        // Connexion
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: email.trim(),
-          password,
-        });
-        
-        if (error) {
-          if (error.message.includes('Email not confirmed')) {
-            setError('Veuillez confirmer votre email avant de vous connecter. Vérifiez votre boîte de réception.');
-          } else if (error.message.includes('Invalid login credentials')) {
-            setError('Email ou mot de passe incorrect.');
-          } else {
-            throw error;
-          }
-        } else if (data.user) {
-          // Connexion réussie
-          onClose();
-          resetForm();
+      if (mode === 'login') {
+        await signIn(email, password);
+        onClose();
+      } else if (mode === 'register') {
+        if (password !== confirmPassword) {
+          setError('Les mots de passe ne correspondent pas');
+          return;
         }
+        await signUp(email, password, { email, full_name: email.split('@')[0] });
+        setSuccess('Compte créé avec succès ! Vérifiez votre email pour confirmer.');
+      } else if (mode === 'reset') {
+        await resetPassword(email);
+        setSuccess('Email de réinitialisation envoyé !');
       }
-    } catch (err) {
-      console.error('Auth error:', err);
-      const errorMessage = err instanceof Error ? err.message : 'Une erreur est survenue';
-      setError(errorMessage);
+    } catch (error: any) {
+      setError(error.message || 'Une erreur est survenue');
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   const resetForm = () => {
     setEmail('');
     setPassword('');
-    setError(null);
-    setSuccess(null);
-    setIsResetPassword(false);
-    setShowEmailSent(false);
-    setIsLogin(true);
-    setShowPassword(false);
+    setConfirmPassword('');
+    setError('');
+    setSuccess('');
+    setMode('login');
   };
 
-  const handleResendConfirmation = async () => {
-    if (!email.trim()) {
-      setError('Veuillez entrer votre adresse email.');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const { error } = await supabase.auth.resend({
-        type: 'signup',
-        email: email.trim(),
-      });
-      
-      if (error) throw error;
-      
-      setSuccess('Un nouvel email de confirmation a été envoyé. Vérifiez votre boîte de réception.');
-    } catch (err) {
-      console.error('Resend error:', err);
-      const errorMessage = err instanceof Error ? err.message : 'Une erreur est survenue lors de l\'envoi';
-      setError(errorMessage);
-    } finally {
-      setLoading(false);
-    }
+  const handleClose = () => {
+    resetForm();
+    onClose();
   };
-
-  if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
-      />
-      
-      {/* Modal */}
-      <div className="relative w-full max-w-md bg-gradient-custom-blue rounded-2xl border border-white/20 shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-gradient-custom-blue rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
         {/* Header */}
-        <div className="relative p-6 border-b border-white/20">
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          
-          <div className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-400 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Bot className="h-8 w-8 text-white" />
+        <div className="flex items-center justify-between p-6 border-b border-white/20">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-green-400 rounded-xl flex items-center justify-center">
+              <Bot className="h-6 w-6 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-white mb-2">
-              {isResetPassword ? 'Réinitialiser le mot de passe' : (isLogin ? 'Se connecter' : 'Créer un compte')}
+            <h2 className="text-xl font-semibold text-white">
+              {mode === 'login' && t('auth.login.title')}
+              {mode === 'register' && t('auth.register.title')}
+              {mode === 'reset' && t('auth.resetPassword.title')}
             </h2>
-            <p className="text-gray-200">
-              {isResetPassword 
-                ? 'Entrez votre email pour recevoir un lien de réinitialisation'
-                : 'Accédez à votre espace ChatX3'
-              }
-            </p>
           </div>
+          <button
+            onClick={handleClose}
+            className="text-gray-300 hover:text-white transition-colors"
+          >
+            <X className="h-6 w-6" />
+          </button>
         </div>
 
         {/* Content */}
         <div className="p-6">
-          {showEmailSent ? (
+          {success ? (
             <div className="text-center">
               <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="h-8 w-8 text-green-400" />
+                <Mail className="h-8 w-8 text-green-400" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Email envoyé !</h3>
-              <p className="text-gray-200 mb-6">{success}</p>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                {t('auth.emailSent.title')}
+              </h3>
+              <p className="text-gray-300 mb-6">
+                {t('auth.emailSent.description')}
+              </p>
               <button
-                onClick={resetForm}
-                className="w-full bg-gradient-to-r from-green-500 to-green-400 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-green-500 transition-all duration-300 font-medium"
+                onClick={() => setMode('login')}
+                className="w-full bg-gradient-to-r from-green-500 to-green-400 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-green-500 transition-all duration-300"
               >
-                Retour à la connexion
+                {t('auth.emailSent.backToLogin')}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Email Field */}
               <div>
                 <label className="block text-sm font-medium text-gray-200 mb-2">
-                  Adresse email
+                  {t('auth.login.email')}
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
-                    placeholder="votre@email.com"
-                    disabled={loading}
+                    placeholder={t('auth.placeholders.email')}
+                    className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    required
                   />
+                  <Mail className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                 </div>
               </div>
 
-              {/* Password Field */}
-              {!isResetPassword && (
+              {mode !== 'reset' && (
                 <div>
                   <label className="block text-sm font-medium text-gray-200 mb-2">
-                    Mot de passe
+                    {t('auth.login.password')}
                   </label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <input
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-10 pr-12 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
-                      placeholder="••••••••"
-                      disabled={loading}
+                      placeholder={t('auth.placeholders.password')}
+                      className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 text-gray-400 hover:text-white transition-colors"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
                     >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                     </button>
                   </div>
                 </div>
               )}
 
-              {/* Error/Success Messages */}
+              {mode === 'register' && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-200 mb-2">
+                    {t('auth.register.confirmPassword')}
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder={t('auth.placeholders.password')}
+                      className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                    >
+                      {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                    </button>
+                  </div>
+                </div>
+              )}
+
               {error && (
-                <div className="flex items-center space-x-2 p-3 bg-red-500/20 border border-red-500/30 rounded-xl">
-                  <AlertCircle className="h-5 w-5 text-red-400 flex-shrink-0" />
-                  <p className="text-sm text-red-300">{error}</p>
+                <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-3 text-red-300 text-sm">
+                  {error}
                 </div>
               )}
 
-              {success && (
-                <div className="flex items-center space-x-2 p-3 bg-green-500/20 border border-green-500/30 rounded-xl">
-                  <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0" />
-                  <p className="text-sm text-green-300">{success}</p>
-                </div>
-              )}
-
-              {/* Submit Button */}
               <button
                 type="submit"
-                disabled={loading}
-                className="w-full bg-gradient-to-r from-green-500 to-green-400 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 font-medium flex items-center justify-center space-x-2"
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-green-500 to-green-400 text-white px-6 py-3 rounded-xl hover:from-green-600 hover:to-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-medium"
               >
-                {loading ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                {isLoading ? (
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                     <span>Chargement...</span>
-                  </>
+                  </div>
                 ) : (
-                  <span>
-                    {isResetPassword ? 'Envoyer le lien' : (isLogin ? 'Se connecter' : 'Créer le compte')}
-                  </span>
+                  <>
+                    {mode === 'login' && t('auth.login.submit')}
+                    {mode === 'register' && t('auth.register.submit')}
+                    {mode === 'reset' && t('auth.resetPassword.submit')}
+                  </>
                 )}
               </button>
 
-              {/* Action Links */}
-              <div className="text-center space-y-3">
-                {!isResetPassword && (
-                  <button
-                    type="button"
-                    onClick={() => setIsResetPassword(true)}
-                    className="text-sm text-green-400 hover:text-green-300 transition-colors"
-                  >
-                    Mot de passe oublié ?
-                  </button>
-                )}
-
-                {isResetPassword && (
-                  <button
-                    type="button"
-                    onClick={() => setIsResetPassword(false)}
-                    className="text-sm text-green-400 hover:text-green-300 transition-colors"
-                  >
-                    Retour à la connexion
-                  </button>
-                )}
-
-                {!isResetPassword && (
-                  <div className="text-sm text-gray-300">
-                    {isLogin ? "Pas encore de compte ? " : "Déjà un compte ? "}
+              {/* Links */}
+              <div className="text-center space-y-2">
+                {mode === 'login' && (
+                  <>
                     <button
                       type="button"
-                      onClick={() => setIsLogin(!isLogin)}
-                      className="text-green-400 hover:text-green-300 transition-colors font-medium"
+                      onClick={() => setMode('reset')}
+                      className="text-green-400 hover:text-green-300 text-sm transition-colors"
                     >
-                      {isLogin ? "Créer un compte" : "Se connecter"}
+                      {t('auth.login.forgotPassword')}
+                    </button>
+                    <div className="text-gray-300 text-sm">
+                      {t('auth.login.noAccount')}{' '}
+                      <button
+                        type="button"
+                        onClick={() => setMode('register')}
+                        className="text-green-400 hover:text-green-300 transition-colors"
+                      >
+                        {t('auth.login.createAccount')}
+                      </button>
+                    </div>
+                  </>
+                )}
+
+                {mode === 'register' && (
+                  <div className="text-gray-300 text-sm">
+                    {t('auth.register.hasAccount')}{' '}
+                    <button
+                      type="button"
+                      onClick={() => setMode('login')}
+                      className="text-green-400 hover:text-green-300 transition-colors"
+                    >
+                      {t('auth.register.signIn')}
                     </button>
                   </div>
+                )}
+
+                {mode === 'reset' && (
+                  <button
+                    type="button"
+                    onClick={() => setMode('login')}
+                    className="text-green-400 hover:text-green-300 text-sm transition-colors"
+                  >
+                    {t('auth.resetPassword.backToLogin')}
+                  </button>
                 )}
               </div>
             </form>

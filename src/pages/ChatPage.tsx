@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { LogOut, Send, Bot, User, Plus, Settings, MessageSquare, Zap, Sparkles } from 'lucide-react';
@@ -6,11 +7,12 @@ import { LogOut, Send, Bot, User, Plus, Settings, MessageSquare, Zap, Sparkles }
 function ChatPage() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const [messages, setMessages] = useState([
     {
       id: 1,
       type: 'ai',
-      content: 'Bonjour ! Je suis ChatX3, votre assistant IA spécialisé Sage X3. Comment puis-je vous aider aujourd\'hui ?',
+      content: t('chat.welcome'),
       timestamp: new Date()
     }
   ]);
@@ -84,7 +86,7 @@ function ChatPage() {
           </div>
           <button className="w-full bg-white/20 hover:bg-white/30 text-white px-4 py-3 rounded-xl flex items-center justify-center space-x-2 transition-all duration-300">
             <Plus className="h-5 w-5" />
-            <span>Nouvelle conversation</span>
+            <span>{t('chat.newConversation')}</span>
           </button>
         </div>
 
@@ -93,15 +95,15 @@ function ChatPage() {
           <div className="space-y-2">
             <button className="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/20 transition-all duration-300 flex items-center space-x-3">
               <MessageSquare className="h-5 w-5" />
-              <span>Conversations</span>
+              <span>{t('chat.conversations')}</span>
             </button>
             <button className="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/20 transition-all duration-300 flex items-center space-x-3">
               <Zap className="h-5 w-5" />
-              <span>Modèles IA</span>
+              <span>{t('chat.aiModels')}</span>
             </button>
             <button className="w-full text-left px-4 py-3 rounded-xl text-white hover:bg-white/20 transition-all duration-300 flex items-center space-x-3">
               <Settings className="h-5 w-5" />
-              <span>Paramètres</span>
+              <span>{t('chat.settings')}</span>
             </button>
           </div>
         </nav>
@@ -114,7 +116,7 @@ function ChatPage() {
             </div>
             <div className="flex-1">
               <p className="text-white font-medium text-sm">{user?.email}</p>
-              <p className="text-gray-300 text-xs">Utilisateur</p>
+              <p className="text-gray-300 text-xs">{t('chat.user')}</p>
             </div>
           </div>
           <button
@@ -122,7 +124,7 @@ function ChatPage() {
             className="w-full flex items-center justify-center space-x-2 px-4 py-2 text-red-400 hover:bg-red-500/20 rounded-xl transition-all duration-300"
           >
             <LogOut className="h-4 w-4" />
-            <span>Se déconnecter</span>
+            <span>{t('userMenu.logout')}</span>
           </button>
         </div>
       </div>
@@ -135,7 +137,7 @@ function ChatPage() {
             <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-400 rounded-lg flex items-center justify-center">
               <Sparkles className="h-4 w-4 text-white" />
             </div>
-            <h1 className="text-xl font-semibold text-white">Assistant IA Sage X3</h1>
+            <h1 className="text-xl font-semibold text-white">{t('chat.title')}</h1>
           </div>
         </div>
 
@@ -167,7 +169,7 @@ function ChatPage() {
                   <p className={`text-xs mt-2 ${
                     message.type === 'user' ? 'text-blue-100' : 'text-gray-300'
                   }`}>
-                    {message.timestamp.toLocaleTimeString('fr-FR', { 
+                    {message.timestamp.toLocaleTimeString(i18n.language === 'fr' ? 'fr-FR' : 'en-US', { 
                       hour: '2-digit', 
                       minute: '2-digit' 
                     })}
@@ -206,7 +208,7 @@ function ChatPage() {
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Tapez votre message ici..."
+                  placeholder={t('chat.input.placeholder')}
                   className="w-full px-4 py-3 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-gray-300 resize-none focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   rows={1}
                   style={{ minHeight: '48px', maxHeight: '120px' }}
@@ -218,11 +220,11 @@ function ChatPage() {
                 className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-400 text-white rounded-xl hover:from-green-600 hover:to-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 flex items-center space-x-2"
               >
                 <Send className="h-5 w-5" />
-                <span>Envoyer</span>
+                <span>{t('chat.input.send')}</span>
               </button>
             </div>
             <p className="text-xs text-gray-300 mt-2 text-center">
-              Appuyez sur Entrée pour envoyer, Maj+Entrée pour une nouvelle ligne
+              {t('chat.input.help')}
             </p>
           </div>
         </div>

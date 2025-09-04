@@ -331,3 +331,40 @@
     transform: none !important;
   }
 }
+
+/* Mode sombre */
+.dark .bg-white\/90 {
+  background-color: rgba(15, 23, 42, 0.9);
+}
+
+.dark .text-gray-800 {
+  color: #f1f5f9;
+}
+
+.dark .text-custom-blue {
+  color: #60a5fa;
+}
+
+.dark .border-white\/20 {
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.dark .hover\:text-custom-blue:hover {
+  color: #93c5fd;
+}
+
+.dark .bg-custom-blue {
+  background-color: #60a5fa;
+}
+
+.dark .hover\:bg-custom-blue-dark:hover {
+  background-color: #3b82f6;
+}
+
+.dark .bg-gradient-custom-blue-dark {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.dark .bg-gradient-custom-blue {
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+}

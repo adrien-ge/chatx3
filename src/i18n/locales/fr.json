@@ -1,162 +1,134 @@
 {
-  "appName": "Intell X3",
-  "auth": {
-    "login": "Se connecter",
-    "register": "Inscription",
-    "email": "Email",
-    "password": "Mot de passe",
-    "fullName": "Nom complet",
-    "loginButton": "Se connecter",
-    "registerButton": "S'inscrire",
+  "common": {
     "loading": "Chargement...",
-    "needAccount": "Besoin d'un compte ? S'inscrire",
-    "haveAccount": "Déjà un compte ? Se connecter",
-    "signOut": "Se déconnecter",
-    "forgotPassword": "Mot de passe oublié ?",
-    "resetPassword": "Réinitialiser le mot de passe",
-    "resetPasswordDescription": "Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
-    "sendResetEmail": "Envoyer le lien de réinitialisation",
-    "resetPasswordSent": "Un email de réinitialisation a été envoyé à votre adresse. Vérifiez votre boîte de réception.",
-    "emailConfirmationRequired": "Veuillez confirmer votre email avant de vous connecter.",
-    "checkYourEmail": "Vérifiez votre boîte email",
-    "confirmationEmailSent": "Un email de confirmation a été envoyé à votre adresse.",
-    "resendConfirmation": "Renvoyer l'email de confirmation",
-    "emailAddress": "Adresse email *",
-    "emailPlaceholder": "votre@email.com",
-    "passwordField": "Mot de passe *",
-    "passwordPlaceholder": "Votre mot de passe",
-    "loginTitle": "Connexion",
-    "forgotPasswordTitle": "Mot de passe oublié",
-    "forgotPasswordDescription": "Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
-    "sendResetLink": "Envoyer le lien de réinitialisation",
-    "emailSent": "Email envoyé !",
-    "backToLogin": "Retour à la connexion",
-    "noAccountYet": "Pas encore de compte ? S'inscrire"
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Sauvegarder",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "refresh": "Actualiser",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "submit": "Envoyer",
+    "reset": "Réinitialiser"
   },
-  "hero": {
-    "title": "Votre expert Sage X3, quand vous en avez besoin !",
-    "subtitle": "Achetez-vous la tranquillité et faites entrer l'IA au centre de votre ERP et en toute sécurité.",
-    "tryButton": "Essayer Gratuitement",
-    "subscribeButton": "S'abonner"
-  },
-  "features": {
-    "title": "Une Solution Complète et Intégrée",
-    "subtitle": "Transformez votre expérience Sage X3 avec notre solution 4-en-1 qui révolutionne la façon dont vos équipes interagissent avec votre système d'information.",
-    "cards": {
-      "support": {
-        "title": "Support Intelligent",
-        "description": "Résolution automatique des problèmes via chat pour tous les utilisateurs dans une page intégrée à Sage X3. Assistance 24/7 avec des réponses contextuelles."
-      },
-      "training": {
-        "title": "Formation Personnalisée",
-        "description": "Montée en compétence continue des utilisateurs par formation guidée et questions-réponses adaptées à leur niveau et leurs besoins spécifiques."
-      },
-      "tips": {
-        "title": "Astuce Quotidienne",
-        "description": "\"Quoi de neuf dans Sage X3\" automatisé pour rappeler aux utilisateurs les fonctionnalités de base et les nouvelles possibilités du système."
-      },
-      "evolution": {
-        "title": "Évolutions Automatisées",
-        "description": "Patchs prêts à installer basés sur les suggestions d'évolutions des utilisateurs. Amélioration continue de votre environnement Sage X3."
-      }
-    },
-    "circle": {
-      "title": "Un système qui s'améliore en permanence",
-      "subtitle": "Notre IA crée un cercle vertueux d'amélioration continue qui transforme votre Sage X3 en un système auto-optimisé avec des équipes de plus en plus autonomes.",
-      "badge": "✨ Cercle Vertueux Intelligent",
-      "steps": {
-        "training": {
-          "title": "Formation continue",
-          "description": "Utilisateurs plus compétents"
-        },
-        "resolution": {
-          "title": "Résolution automatique",
-          "description": "Bugs de plus en plus rares"
-        },
-        "suggestions": {
-          "title": "Suggestions proactives",
-          "description": "Évolutions métier pertinentes"
-        },
-        "patches": {
-          "title": "Suggestions de patchs",
-          "description": "Basées sur les problèmes utilisateurs"
-        },
-        "development": {
-          "title": "Développement automatisé",
-          "description": "Déploiement simplifié"
-        },
-        "result": {
-          "title": "Résultat",
-          "description": "ERP auto-optimisé"
-        }
-      },
-      "cta": {
-        "examples": "Voir les exemples",
-        "pricing": "Découvrir les tarifs"
-      }
-    }
-  },
-  "examples": {
-    "title": "Voyez la Magie Opérer",
-    "subtitle": "Observez comment notre IA pourrait vous aider",
-    "demoQuestion": "Je ne peux pas valider ma livraison, le message suivant apparaît : Commande non livrable : Client en attente.",
-    "demoResponse": "Ce message apparaît en picking de commande, de demande de livraison ou de création directe de livraison si le client facturé est bloqué. Il est alors impossible de créer la livraison, sauf pour une commande ayant été débloquée par un utilisateur habilité.",
-    "showCode": "Afficher le Code",
-    "hideCode": "Masquer le Code",
-    "tryMore": "Essayer Plus d'Exemples",
-    "startDemo": "Démarrer la Démo",
-    "restartDemo": "Recommencer",
-    "chat": {
-      "assistantName": "Intell X3 Assistant",
-      "expertOnline": "Expert Sage X3 en ligne",
-      "online": "En ligne",
-      "welcomeMessage": "Bonjour ! Je suis votre assistant Sage X3. Comment puis-je vous aider aujourd'hui ?",
-      "aiThinking": "IA en cours de réflexion...",
-      "placeholder": "Tapez votre question sur Sage X3...",
-      "send": "Envoyer",
-      "interactiveDemo": "Démonstration Interactive"
-    }
-  },
-  "pricing": {
-    "title": "Tarification Simple et Transparente",
-    "subtitle": "Choisissez le plan qui convient le mieux à vous et votre équipe. Commencez à optimiser votre Sage X3 dès aujourd'hui.",
-    "footer": "Afin de garantir une expérience utilisateur optimale, nous avons instauré une liste d'attente pour l'inscription. Soyez assuré que nous vous informerons régulièrement de votre progression jusqu'au déploiement de votre instance.",
-    "plans": {
-      "trial": {
-        "name": "Essai Gratuit",
-        "price": "0",
-        "period": "pour 15 jours",
-        "description": "Parfait pour découvrir les possibilités",
-        "features": [
-          "Support pour 10 utilisateurs",
-          "Tester la programmation assistée par IA",
-          "Administration et Dashboard d'analyse"
-        ],
-        "cta": "Commencer Gratuitement"
-      },
-      "complete": {
-        "name": "Solution Complète",
-        "basePrice": "500",
-        "userPrice": "20",
-        "developerPrice": "1000",
-        "period": "par mois",
-        "description": "Pour les équipes Sage X3 professionnelles",
-        "features": [
-          "Base : 500€/mois",
-          "Utilisateurs : 20€/mois par utilisateur",
-          "Développeurs : 1000€/mois par développeur",
-          "Administration et Dashboard d'analyse",
-          "Système d'approbation des évolutions"
-        ],
-        "cta": "Configurer Mon Plan",
-        "recommended": "Recommandé"
-      }
-    }
-  },
-  "nav": {
+  "navigation": {
+    "home": "Accueil",
     "features": "Fonctionnalités",
     "examples": "Exemples",
     "pricing": "Tarifs",
-    "getStarted": "Se connecter"
+    "about": "À propos",
+    "contact": "Contact",
+    "dashboard": "Tableau de bord",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Se déconnecter"
+  },
+  "landing": {
+    "hero": {
+      "title": "Votre expert",
+      "subtitle": "quand vous en avez besoin !",
+      "description": "Achetez-vous la tranquillité et faites entrer l'IA au centre de votre ERP et en toute sécurité.",
+      "cta": {
+        "subscribe": "S'abonner",
+        "demo": "Voir des exemples"
+      }
+    },
+    "solution": {
+      "tag": "Solution 4-en-1 Intégrée à Sage X3",
+      "title": "Une Solution Complète et Intégrée",
+      "description": "Découvrez comment notre solution d'IA révolutionne la gestion de votre ERP Sage X3. Automatisez vos processus, optimisez votre productivité et prenez des décisions éclairées grâce à notre technologie de pointe."
+    },
+    "features": {
+      "fast": {
+        "title": "Rapide & Efficace",
+        "description": "Réponses instantanées avec une précision exceptionnelle"
+      },
+      "intelligent": {
+        "title": "Intelligence Avancée",
+        "description": "Technologie de pointe pour des conversations naturelles"
+      },
+      "secure": {
+        "title": "Sécurisé & Privé",
+        "description": "Vos données sont protégées et restent confidentielles"
+      }
+    }
+  },
+  "chat": {
+    "title": "Assistant IA Sage X3",
+    "newConversation": "Nouvelle conversation",
+    "conversations": "Conversations",
+    "aiModels": "Modèles IA",
+    "settings": "Paramètres",
+    "input": {
+      "placeholder": "Tapez votre message ici...",
+      "send": "Envoyer",
+      "help": "Appuyez sur Entrée pour envoyer, Maj+Entrée pour une nouvelle ligne"
+    },
+    "welcome": "Bonjour ! Je suis ChatX3, votre assistant IA spécialisé Sage X3. Comment puis-je vous aider aujourd'hui ?",
+    "typing": "ChatX3 est en train d'écrire...",
+    "user": "Utilisateur"
+  },
+  "auth": {
+    "login": {
+      "title": "Se connecter",
+      "subtitle": "Accédez à votre espace ChatX3",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Pas encore de compte ?",
+      "createAccount": "Créer un compte"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "subtitle": "Rejoignez ChatX3 dès aujourd'hui",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Créer le compte",
+      "hasAccount": "Déjà un compte ?",
+      "signIn": "Se connecter"
+    },
+    "resetPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Entrez votre email pour recevoir un lien de réinitialisation",
+      "email": "Adresse email",
+      "submit": "Envoyer le lien",
+      "backToLogin": "Retour à la connexion"
+    },
+    "emailSent": {
+      "title": "Email envoyé !",
+      "description": "Un email de réinitialisation a été envoyé à votre adresse. Vérifiez votre boîte de réception et cliquez sur le lien pour réinitialiser votre mot de passe.",
+      "backToLogin": "Retour à la connexion"
+    },
+    "errors": {
+      "emailRequired": "Veuillez entrer votre adresse email.",
+      "passwordRequired": "Veuillez entrer votre mot de passe.",
+      "invalidCredentials": "Email ou mot de passe incorrect.",
+      "emailNotConfirmed": "Veuillez confirmer votre email avant de vous connecter. Vérifiez votre boîte de réception.",
+      "notConfigured": "L'authentification n'est pas configurée. Veuillez contacter l'administrateur pour configurer Supabase.",
+      "generic": "Une erreur est survenue"
+    },
+    "placeholders": {
+      "email": "votre@email.com",
+      "password": "••••••••"
+    }
+  },
+  "userMenu": {
+    "accountSettings": "Paramètres du compte",
+    "premiumPlan": "Plan Premium",
+    "logout": "Se déconnecter",
+    "loggingOut": "Déconnexion..."
+  },
+  "footer": {
+    "copyright": "© 2024 ChatX3. Tous droits réservés."
   }
 }

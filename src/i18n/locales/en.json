@@ -1,162 +1,134 @@
 {
-  "appName": "Intell X3",
-  "auth": {
-    "login": "Login",
-    "register": "Register",
-    "email": "Email",
-    "password": "Password",
-    "fullName": "Full Name",
-    "loginButton": "Login",
-    "registerButton": "Register",
+  "common": {
     "loading": "Loading...",
-    "needAccount": "Need an account? Register",
-    "haveAccount": "Already have an account? Login",
-    "signOut": "Sign Out",
-    "forgotPassword": "Forgot password?",
-    "resetPassword": "Reset Password",
-    "resetPasswordDescription": "Enter your email address and we'll send you a link to reset your password.",
-    "sendResetEmail": "Send Reset Link",
-    "resetPasswordSent": "A password reset email has been sent to your address. Please check your inbox.",
-    "emailConfirmationRequired": "Please confirm your email before logging in.",
-    "checkYourEmail": "Check your email",
-    "confirmationEmailSent": "A confirmation email has been sent to your address.",
-    "resendConfirmation": "Resend confirmation email",
-    "emailAddress": "Email address *",
-    "emailPlaceholder": "your@email.com",
-    "passwordField": "Password *",
-    "passwordPlaceholder": "Your password",
-    "loginTitle": "Login",
-    "forgotPasswordTitle": "Forgot password",
-    "forgotPasswordDescription": "Enter your email address and we'll send you a link to reset your password.",
-    "sendResetLink": "Send reset link",
-    "emailSent": "Email sent!",
-    "backToLogin": "Back to login",
-    "noAccountYet": "No account yet? Register"
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "refresh": "Refresh",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "reset": "Reset"
   },
-  "hero": {
-    "title": "Your on-demand Sage X3 expert!",
-    "subtitle": "Buy yourself peace of mind and bring AI to the center of your ERP safely and securely.",
-    "tryButton": "Try for Free",
-    "subscribeButton": "Subscribe Now"
-  },
-  "features": {
-    "title": "A Complete and Integrated Solution",
-    "subtitle": "Transform your Sage X3 experience with our 4-in-1 solution that revolutionizes how your teams interact with your information system.",
-    "cards": {
-      "support": {
-        "title": "Intelligent Support",
-        "description": "Automatic problem resolution via chat for all users in a page integrated with Sage X3. 24/7 assistance with contextual responses."
-      },
-      "training": {
-        "title": "Personalized Training",
-        "description": "Continuous skill development for users through guided training and Q&A adapted to their level and specific needs."
-      },
-      "tips": {
-        "title": "Daily Tips",
-        "description": "Automated 'What's new in Sage X3' to remind users of basic features and new system possibilities."
-      },
-      "evolution": {
-        "title": "Automated Evolutions",
-        "description": "Ready-to-install patches based on user evolution suggestions. Continuous improvement of your Sage X3 environment."
-      }
-    },
-    "circle": {
-      "title": "A system that continuously improves",
-      "subtitle": "Our AI creates a virtuous circle of continuous improvement that transforms your Sage X3 into a self-optimized system with increasingly autonomous teams.",
-      "badge": "✨ Intelligent Virtuous Circle",
-      "steps": {
-        "training": {
-          "title": "Continuous Training",
-          "description": "More competent users"
-        },
-        "resolution": {
-          "title": "Automatic Resolution",
-          "description": "Increasingly rare bugs"
-        },
-        "suggestions": {
-          "title": "Proactive Suggestions",
-          "description": "Relevant business evolutions"
-        },
-        "patches": {
-          "title": "Patch Suggestions",
-          "description": "Based on user problems"
-        },
-        "development": {
-          "title": "Automated Development",
-          "description": "Simplified deployment"
-        },
-        "result": {
-          "title": "Result",
-          "description": "Self-optimized ERP"
-        }
-      },
-      "cta": {
-        "examples": "See Examples",
-        "pricing": "Discover Pricing"
-      }
-    }
-  },
-  "examples": {
-    "title": "See the Magic Happen",
-    "subtitle": "Watch how our AI could help you",
-    "demoQuestion": "I can't validate my delivery, the following message appears: Order not deliverable: Customer on hold.",
-    "demoResponse": "This message appears in order picking, delivery request or direct delivery creation if the billed customer is blocked. It is then impossible to create the delivery, except for an order that has been unblocked by an authorized user.",
-    "showCode": "Show Code",
-    "hideCode": "Hide Code",
-    "tryMore": "Try More Examples",
-    "startDemo": "Start Demo",
-    "restartDemo": "Restart",
-    "chat": {
-      "assistantName": "Intell X3 Assistant",
-      "expertOnline": "Sage X3 Expert Online",
-      "online": "Online",
-      "welcomeMessage": "Hello! I'm your Sage X3 assistant. How can I help you today?",
-      "aiThinking": "AI thinking...",
-      "placeholder": "Type your question about Sage X3...",
-      "send": "Send",
-      "interactiveDemo": "Interactive Demo"
-    }
-  },
-  "pricing": {
-    "title": "Simple, Transparent Pricing",
-    "subtitle": "Choose the plan that works best for you and your team. Start optimizing your Sage X3 today.",
-    "footer": "As we are performance-conscious, we have implemented a waiting list to manage our server resources. We will keep you regularly updated on your position in the queue.",
-    "plans": {
-      "trial": {
-        "name": "Free Trial",
-        "price": "0",
-        "period": "for 15 days",
-        "description": "Perfect for exploring the possibilities",
-        "features": [
-          "Support for 10 users",
-          "Test AI-assisted programming",
-          "Administration and Analytics Dashboard"
-        ],
-        "cta": "Start Free"
-      },
-      "complete": {
-        "name": "Complete Solution",
-        "basePrice": "500",
-        "userPrice": "20",
-        "developerPrice": "1000",
-        "period": "per month",
-        "description": "For professional Sage X3 teams",
-        "features": [
-          "Base: $500/month",
-          "Users: $20/month per user",
-          "Developers: $1000/month per developer",
-          "Administration and Analytics Dashboard",
-          "Evolution approval system"
-        ],
-        "cta": "Configure My Plan",
-        "recommended": "Recommended"
-      }
-    }
-  },
-  "nav": {
+  "navigation": {
+    "home": "Home",
     "features": "Features",
     "examples": "Examples",
     "pricing": "Pricing",
-    "getStarted": "Login"
+    "about": "About",
+    "contact": "Contact",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "landing": {
+    "hero": {
+      "title": "Your expert",
+      "subtitle": "when you need it!",
+      "description": "Buy yourself peace of mind and bring AI to the center of your ERP safely and securely.",
+      "cta": {
+        "subscribe": "Subscribe",
+        "demo": "See examples"
+      }
+    },
+    "solution": {
+      "tag": "4-in-1 Solution Integrated with Sage X3",
+      "title": "A Complete and Integrated Solution",
+      "description": "Discover how our AI solution revolutionizes your Sage X3 ERP management. Automate your processes, optimize your productivity and make informed decisions with our cutting-edge technology."
+    },
+    "features": {
+      "fast": {
+        "title": "Fast & Efficient",
+        "description": "Instant responses with exceptional accuracy"
+      },
+      "intelligent": {
+        "title": "Advanced Intelligence",
+        "description": "Cutting-edge technology for natural conversations"
+      },
+      "secure": {
+        "title": "Secure & Private",
+        "description": "Your data is protected and remains confidential"
+      }
+    }
+  },
+  "chat": {
+    "title": "Sage X3 AI Assistant",
+    "newConversation": "New conversation",
+    "conversations": "Conversations",
+    "aiModels": "AI Models",
+    "settings": "Settings",
+    "input": {
+      "placeholder": "Type your message here...",
+      "send": "Send",
+      "help": "Press Enter to send, Shift+Enter for new line"
+    },
+    "welcome": "Hello! I'm ChatX3, your Sage X3 specialized AI assistant. How can I help you today?",
+    "typing": "ChatX3 is typing...",
+    "user": "User"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "subtitle": "Access your ChatX3 space",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Sign In",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account yet?",
+      "createAccount": "Create account"
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "Join ChatX3 today",
+      "email": "Email address",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign In"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Enter your email to receive a reset link",
+      "email": "Email address",
+      "submit": "Send link",
+      "backToLogin": "Back to login"
+    },
+    "emailSent": {
+      "title": "Email sent!",
+      "description": "A password reset email has been sent to your address. Check your inbox and click the link to reset your password.",
+      "backToLogin": "Back to login"
+    },
+    "errors": {
+      "emailRequired": "Please enter your email address.",
+      "passwordRequired": "Please enter your password.",
+      "invalidCredentials": "Invalid email or password.",
+      "emailNotConfirmed": "Please confirm your email before signing in. Check your inbox.",
+      "notConfigured": "Authentication is not configured. Please contact the administrator to configure Supabase.",
+      "generic": "An error occurred"
+    },
+    "placeholders": {
+      "email": "your@email.com",
+      "password": "••••••••"
+    }
+  },
+  "userMenu": {
+    "accountSettings": "Account settings",
+    "premiumPlan": "Premium Plan",
+    "logout": "Logout",
+    "loggingOut": "Logging out..."
+  },
+  "footer": {
+    "copyright": "© 2024 ChatX3. All rights reserved."
   }
 }

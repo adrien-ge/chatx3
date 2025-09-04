@@ -1,7 +1,10 @@
 import React from 'react';
 import { Code2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import UserMenu from './auth/UserMenu';
+import LanguageSelector from './LanguageSelector';
+import DarkModeToggle from './DarkModeToggle';
 
 interface NavbarProps {
   onAuthClick: () => void;
@@ -9,6 +12,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onAuthClick }) => {
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <header className="bg-white/90 backdrop-blur-sm border-b border-white/20 sticky top-0 z-50">
@@ -26,23 +30,16 @@ const Navbar: React.FC<NavbarProps> = ({ onAuthClick }) => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             <a href="#fonctionnalites" className="text-gray-800 hover:text-custom-blue transition-colors font-medium">
-              Fonctionnalités
+              {t('navigation.features')}
             </a>
             <a href="#exemples" className="text-gray-800 hover:text-custom-blue transition-colors font-medium">
-              Exemples
+              {t('navigation.examples')}
             </a>
             <a href="#tarifs" className="text-gray-800 hover:text-custom-blue transition-colors font-medium">
-              Tarifs
+              {t('navigation.pricing')}
             </a>
-            <div className="flex items-center space-x-2 text-gray-800 font-medium">
-              <span>FR</span>
-              <span className="text-gray-400">FR</span>
-            </div>
-            <button className="p-2 text-gray-800 hover:text-custom-blue transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            </button>
+            <LanguageSelector />
+            <DarkModeToggle />
           </div>
 
           <div className="flex items-center space-x-4">
@@ -53,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = ({ onAuthClick }) => {
                 onClick={onAuthClick}
                 className="px-6 py-2 rounded-lg bg-custom-blue text-white font-medium hover:bg-custom-blue-dark transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                Se connecter
+                {t('auth.login.submit')}
               </button>
             )}
           </div>

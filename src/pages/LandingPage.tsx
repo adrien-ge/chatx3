@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import AuthModal from '../components/auth/AuthModal';
 import { useAuth } from '../contexts/AuthContext';
@@ -8,6 +9,7 @@ function LandingPage() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { user, isConfigured } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (user && isConfigured) {
@@ -37,13 +39,13 @@ function LandingPage() {
 
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
-            Votre expert <span className="text-green-400">Sage X3</span><br />
-            quand vous en avez besoin !
+            {t('landing.hero.title')} <span className="text-green-400">Sage X3</span><br />
+            {t('landing.hero.subtitle')}
           </h1>
           
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-white mb-8 max-w-4xl mx-auto leading-relaxed">
-            Achetez-vous la tranquillité et faites entrer l'IA au centre de votre ERP et en toute sécurité.
+            {t('landing.hero.description')}
           </p>
 
           {/* CTA Buttons */}
@@ -52,10 +54,10 @@ function LandingPage() {
               onClick={handleAuthClick}
               className="bg-custom-blue text-white px-8 py-4 rounded-xl hover:bg-custom-blue-dark transition-all duration-300 transform hover:scale-105 font-semibold text-lg shadow-2xl border-2 border-custom-blue"
             >
-              S'abonner
+              {t('landing.hero.cta.subscribe')}
             </button>
             <button className="bg-white text-custom-blue px-8 py-4 rounded-xl hover:bg-gray-100 transition-all duration-300 font-semibold text-lg border-2 border-custom-blue flex items-center space-x-2">
-              <span>Voir des exemples</span>
+              <span>{t('landing.hero.cta.demo')}</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -65,7 +67,7 @@ function LandingPage() {
           {/* Solution Tag */}
           <div className="mb-16">
             <div className="inline-block bg-gray-200 text-gray-800 px-6 py-3 rounded-full text-sm font-medium">
-              Solution 4-en-1 Intégrée à Sage X3
+              {t('landing.solution.tag')}
             </div>
           </div>
 
@@ -77,8 +79,8 @@ function LandingPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Rapide & Efficace</h3>
-              <p className="text-gray-300">Réponses instantanées avec une précision exceptionnelle</p>
+              <h3 className="text-xl font-semibold text-white mb-2">{t('landing.features.fast.title')}</h3>
+              <p className="text-gray-300">{t('landing.features.fast.description')}</p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
@@ -87,8 +89,8 @@ function LandingPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Intelligence Avancée</h3>
-              <p className="text-gray-300">Technologie de pointe pour des conversations naturelles</p>
+              <h3 className="text-xl font-semibold text-white mb-2">{t('landing.features.intelligent.title')}</h3>
+              <p className="text-gray-300">{t('landing.features.intelligent.description')}</p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
@@ -97,8 +99,8 @@ function LandingPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Sécurisé & Privé</h3>
-              <p className="text-gray-300">Vos données sont protégées et restent confidentielles</p>
+              <h3 className="text-xl font-semibold text-white mb-2">{t('landing.features.secure.title')}</h3>
+              <p className="text-gray-300">{t('landing.features.secure.description')}</p>
             </div>
           </div>
 
@@ -106,12 +108,10 @@ function LandingPage() {
           <div className="bg-white rounded-3xl p-12 max-w-6xl mx-auto">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-gray-800 mb-6">
-                Une Solution Complète et Intégrée
+                {t('landing.solution.title')}
               </h2>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Découvrez comment notre solution d'IA révolutionne la gestion de votre ERP Sage X3. 
-                Automatisez vos processus, optimisez votre productivité et prenez des décisions éclairées 
-                grâce à notre technologie de pointe.
+                {t('landing.solution.description')}
               </p>
             </div>
           </div>
@@ -121,7 +121,7 @@ function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-white/10 py-8">
         <div className="container mx-auto px-4 text-center text-gray-300">
-          <p>&copy; 2024 ChatX3. Tous droits réservés.</p>
+          <p>{t('footer.copyright')}</p>
         </div>
       </footer>
 
